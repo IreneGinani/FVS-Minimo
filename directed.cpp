@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <map>
 
 void preencherMatriz(std::vector<std::vector<int>> matrizAdjacencia){
 
@@ -133,6 +134,18 @@ bool eVazio(std::vector<int> somas){
 
 
 }
+void MaxGrau(std::vector<int> &soma, std::map<int, int> map){
+
+
+	for (int i = 0; i < soma.size(); ++i)
+	{
+		map[i] = soma[i];
+	}
+
+	for 
+
+
+}
 
 
 
@@ -143,6 +156,7 @@ int main(){
 	std::vector<int> OC;
 	std::vector<std::vector<int>> matrizAdjacencia (5, std::vector<int>(5) );
 	std::vector<int> somas;
+	std::map<int, int> map;
 	preencherMatriz(matrizAdjacencia);
 	SomaGraus(matrizAdjacencia, somas);
 
@@ -168,7 +182,12 @@ int main(){
 
 	if(!eVazio(somas)){
 
-		sort(somas.begin(), somas.end());
+		MaxGrau(somas,map);
+
+		//ver como achar o maior valor em um hashmap, depois mudar a parte de cima pra uma função e chamar aqui até ser vazio
+		//e então fazer a união desses conjuntos como um só. Fazer métodos de quando um vértice tem 0 de grau.
+
+
 
 
 	}
