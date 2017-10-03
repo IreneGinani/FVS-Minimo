@@ -227,12 +227,25 @@ void printFVS(std::vector<std::vector<int>> matrizAdjacencia){
 	}
 }
 
-int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> matrizAdjacenciaAux,std::vector<std::vector<int>> matrizAdjacenciaAux0, std::vector<int> CI, std::vector<int> FVS, std::map<int, int> map,std::vector<int> somas){
+int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> grafo, std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> matrizAdjacenciaAux,std::vector<std::vector<int>> matrizAdjacenciaAux0, std::vector<int> CI, std::vector<int> FVS, std::map<int, int> map,std::vector<int> somas){
 
 	std::vector<int> CIAux;
 	std::vector<int> CV ;
 	std::vector<int> vizinhos ;
 	int aux;
+	int lowerbound = CI.size();
+	int upperbound = matrizAdjacencia.size();
+
+	if (upperbound > lb)
+		return 0; 
+	else if (upperbound < lb)
+		lb = upperbound; 
+	if (lowerbound < lb)
+		return 0;
+	else if (lowerbound > lb)
+		lb = lowerbound; 
+
+	grafo[it].push_back(matrizAdjacencia.size() - CI.size());
 
 	for (int i = 0; i < CI.size(); ++i)
 	{
@@ -294,21 +307,21 @@ int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::
 			return 0;
 		}else if(somas[CV[CI[i]]] == 1){
 			CI.push_back(CV[CI[i]]);
-			//tudo de novo
+			calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 		}else if (somas[CV[CI[i]]] >= 4){
 			CI.push_back(CV[CI[i]]);
-			//tudo de novo
+			calcularFVS(it++, lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			for (int j = 0; j < matrizAdjacenciaAux0.size(); ++j)
 			{
 				matrizAdjacenciaAux0[i][CV[CI[i]]] = 0;
 				matrizAdjacenciaAux0[CV[CI[i]]][i] = 0;
 			}
-			//tudo de novo
 
-			//fica o maior dos dois
+			calcularFVS(it++, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+
 		}else if(somas[CV[CI[i]]] == 2){
 			CI.push_back(CV[CI[i]]);
-			//tudo de novo
+			calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			for (int j = 0; j < matrizAdjacencia[CV[CI[i]]].size(); ++j)
 			{
 				if (matrizAdjacencia[CV[CI[i]]][j] != 0)
@@ -334,7 +347,7 @@ int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::
 
 			vizinhos.clear();
 
-				//de novo
+			calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			
 		}else if(somas[CV[CI[i]]] == 3)
 
@@ -346,7 +359,7 @@ int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::
 
 		CI.push_back(random);
 
-		//tudo de novo
+		calcularFVS(it++,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 		for (int i = 0; i < matrizAdjacencia[random].size(); ++i)
 		{
@@ -363,7 +376,7 @@ int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::
 
 		CI.push_back(vizinhos[0]);
 
-		//tudo de novo
+		calcularFVS(it++,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 		for (int i = 0; i < matrizAdjacencia[random].size(); ++i)
 		{
@@ -382,7 +395,7 @@ int calcularFVS(std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::
 			CI.pop_back();
 		}
 
-		//tudo de novo
+		calcularFVS(it++, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 	}
 
@@ -397,9 +410,11 @@ int main(){
 	std::vector<std::vector<int>> matrizAdjacencia (5, std::vector<int>(5) );
 	std::vector<std::vector<int>> matrizAdjacenciaAux (5, std::vector<int>(5) );
 	std::vector<std::vector<int>> matrizAdjacenciaAux0 (5, std::vector<int>(5) );
+	std::vector<std::vector<int>> grafo (5, std::vector<int>(5) );
 	std::vector<int> somas;
 	std::map<int, int> map;
 	int *cc;
+	int ub, lb, it = 0;
 
 
 
@@ -413,6 +428,12 @@ int main(){
 	SomaGraus(matrizAdjacencia, somas);
 	
 	ConjuntoIndependente(somas,matrizAdjacenciaAux, CI, map);
+
+	lb = CI.size();
+
+	ub = matrizAdjacencia.size();
+
+	calcularFVS(it, lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 	
 	
