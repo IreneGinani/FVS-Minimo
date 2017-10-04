@@ -20,6 +20,19 @@
 #include <chrono>
 #include <set>
 
+void preencherAleatorio (std::vector<std::vector<int>> &matrizAdjacencia){
+	for (int i = 0; i < matrizAdjacencia.size(); ++i)
+	{
+		for (int j = 0; j < matrizAdjacencia[0].size(); ++j)
+		{
+			if(( i%2 == 0) || (j%2 == 0)){
+				matrizAdjacencia[i][j] = 1;
+				matrizAdjacencia[j][i] = 1;
+			}
+		}
+	}
+}
+
 void preencherMatriz(std::vector<std::vector<int>> &matrizAdjacencia){
 
 	matrizAdjacencia[0][1] = 1;
@@ -31,8 +44,8 @@ void preencherMatriz(std::vector<std::vector<int>> &matrizAdjacencia){
 	matrizAdjacencia[3][2] = 1;
 	matrizAdjacencia[2][3] = 1;
 
-	matrizAdjacencia[1][1] = 1;
-	matrizAdjacencia[1][1] = 1;
+	// matrizAdjacencia[1][1] = 1;
+	// matrizAdjacencia[1][1] = 1;
 
 
 	matrizAdjacencia[3][4] = 1;
@@ -45,30 +58,33 @@ void preencherMatriz(std::vector<std::vector<int>> &matrizAdjacencia){
 	matrizAdjacencia[5][6] = 1;
 	matrizAdjacencia[6][5] = 1;
 
-	matrizAdjacencia[5][3] = 1;
-	matrizAdjacencia[3][5] = 1;
+	matrizAdjacencia[5][4] = 1;
+	matrizAdjacencia[4][5] = 1;
 
-	matrizAdjacencia[7][5] = 1;
-	matrizAdjacencia[5][7] = 1;
+	matrizAdjacencia[1][3] = 1;
+	matrizAdjacencia[3][1] = 1;
 
 	matrizAdjacencia[3][6] = 1;
 	matrizAdjacencia[6][3] = 1;
 
-	matrizAdjacencia[3][7] = 1;
-	matrizAdjacencia[7][3] = 1;
+	matrizAdjacencia[4][6] = 1;
+	matrizAdjacencia[6][4] = 1;
 
-	matrizAdjacencia[8][7] = 1;
-	matrizAdjacencia[7][8] = 1;
+	matrizAdjacencia[3][5] = 1;
+	matrizAdjacencia[3][3] = 1;
 
-	matrizAdjacencia[8][3] = 1;
-	matrizAdjacencia[3][8] = 1;
+	// matrizAdjacencia[8][7] = 1;
+	// matrizAdjacencia[7][8] = 1;
+
+	// matrizAdjacencia[8][3] = 1;
+	// matrizAdjacencia[3][8] = 1;
 
 
-	matrizAdjacencia[8][9] = 1;
-	matrizAdjacencia[9][8] = 1;
+	// matrizAdjacencia[8][9] = 1;
+	// matrizAdjacencia[9][8] = 1;
 
-	matrizAdjacencia[8][6] = 1;
-	matrizAdjacencia[6][8] = 1;
+	// matrizAdjacencia[8][6] = 1;
+	// matrizAdjacencia[6][8] = 1;
 
 
 
@@ -327,12 +343,14 @@ bool verificaCiclo(std::vector<std::vector<int>> matrizAdjacencia){
 					achou = 1; 
 					matrizAdjacencia[j][v] = -1;
 					matrizAdjacencia[v][j] = -1;
-					//std::cout<<"v:"<<v<<"j"<<j;
+					//std::cout<<"vn:"<<v<<"j"<<j;
 					break;
-				}else if (((matrizAdjacencia[v][j] == 1) && (marcados[j] == 1)) || ((matrizAdjacencia[v][j] == -1) && (marcados[j] == 1))){
+				}else if (((matrizAdjacencia[v][j] == -1) && (marcados[j] == 1)) && (j==matrizAdjacencia.size()-1)){
 					//std::cout<<"v:"<<v<<"j"<<j;
 					return true;
-				}
+				 }//else if (((matrizAdjacencia[v][j] == -1) && (marcados[j] == 1)))
+				// 	j++;
+
 			
 			} 
 
@@ -404,7 +422,7 @@ int vizinhosGenericos(std::vector<std::vector<int>> matrizAdjacencia, std::vecto
 
 }
 
-int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> matrizAdjacenciaAux,std::vector<std::vector<int>> matrizAdjacenciaAux0, std::vector<int> &CI, std::set<int> &FVS, std::map<int, int> map,std::vector<int> somas){
+int calcularFVS(int &it, int lb, int ub,std::vector<std::vector<int>> &grafo, std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> matrizAdjacenciaAux,std::vector<std::vector<int>> matrizAdjacenciaAux0, std::vector<int> &CI, std::set<int> &FVS, std::map<int, int> map,std::vector<int> somas){
 	std::vector<int> CIAux;
 	std::vector<int> CV ;
 	std::vector<int> vizinhos ;
@@ -417,7 +435,8 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 	std::vector<int>::iterator it2;
 
-	
+	it++;
+	std::cout<< "itt:"<<it<<std::endl;
 
 	if (upperbound < ub){
 		//std::cout<< "dede"<<std::endl;
@@ -434,13 +453,13 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 	// if(lowerbound == matrizAdjacencia.size())
 	// 	return 0;
 
-	grafo[it].push_back(matrizAdjacencia.size() - CI.size());
+	///grafo[it].push_back(matrizAdjacencia.size() - CI.size());
 		//std::cout<<matrizAdjacencia.size() - CI.size()<<std::endl;	
-    //std::cout<< "itt:"<<CI.size()<<std::endl;
+    
 	for (int i = 0; i < matrizAdjacencia.size(); ++i)
 	{
 		CV.push_back(0);
-		//std::cout<< CI[i]<<std::endl;
+		
 	}
 
 
@@ -468,6 +487,7 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 		for (int j = 0; j < matrizAdjacenciaAux0[i].size(); ++j)
 		{
+
 			if (matrizAdjacenciaAux0[CI[i]][r] == 1)
 				break;
 			else
@@ -476,6 +496,7 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 		for (int j = 0; j < matrizAdjacenciaAux0[i].size(); ++j)
 		{
+
 			it2 = find(CI.begin(), CI.end(), j);
 			if ((matrizAdjacenciaAux0[r][j] == 1) && (j!=CI[i]) && (it2 != CI.end()))
 				vizinhos2.push_back(j);
@@ -483,14 +504,16 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 		int r1 = rand() % matrizAdjacenciaAux0.size();
 
+		
 
 		if (CV[CI[i]] == matrizAdjacenciaAux0[CI[i]].size()-1){
 
+			//std::cout<< matrizAdjacenciaAux0[CI[i]].size()<<std::endl;
 			for (int j = 0; j < matrizAdjacenciaAux0.size(); ++j)
 			{
 				for (int k = 0; k < matrizAdjacenciaAux0[CI[i]].size(); ++k)
 				{
-					if ((matrizAdjacenciaAux0[j][k] != 0) && (k != i) && (j != i) && (matrizAdjacenciaAux0[j][k+1] != 0)){
+					if ((matrizAdjacenciaAux0[j][k] != 0) && (k != i) && (j != i) && (matrizAdjacenciaAux0[j][k+1] != 0) && (k<matrizAdjacenciaAux0.size()-1)){
 							matrizAdjacenciaAux0[k][k+1] = 1;
 					}
 				}
@@ -540,8 +563,9 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 			printFVS(FVS,matrizAdjacencia, CI, CIAux,1);
 			return 0;
 
-	 	}else if(vizinhosGenericos(matrizAdjacenciaAux0, vizinhos2, r1) <= 1){
+	  	}else if(vizinhosGenericos(matrizAdjacenciaAux0, vizinhos2, r1) <= 1){
 	 		CI.push_back(r);
+
 	 		if (printFVS(FVS,matrizAdjacencia,CI,CIAux,0) < ub){
 	 		  	ub = printFVS(FVS,matrizAdjacencia,CI, CIAux,0);
 	 		  	lb = CI.size();
@@ -549,39 +573,49 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 			    
 	 		}
 	 		printFVS(FVS,matrizAdjacencia,CI,CIAux, 1);
-	 		calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );	
+	 		calcularFVS(it,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );	
 	 	}else if (vizinhosGenericos(matrizAdjacenciaAux0,vizinhos2, r1) >= 4){
 			CI.push_back(r);
 			//std::cout<<r <<CI.back();
-			calcularFVS(it++, lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+			calcularFVS(it, lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			for (int j = 0; j < matrizAdjacenciaAux0.size(); ++j)
 			{
 				matrizAdjacenciaAux0[i][r] = 0;
 				matrizAdjacenciaAux0[r][i] = 0;
 			}
 			printFVS(FVS,matrizAdjacencia,CI,CIAux, 1);
-			calcularFVS(it++, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+			calcularFVS(it, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 	  	}else if(vizinhosGenericos(matrizAdjacenciaAux0,vizinhos2,r1) == 2){
 			CI.push_back(r);
-			calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+			calcularFVS(it,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			for (int j = 0; j < matrizAdjacencia[0].size(); ++j)
 			{
-				if (matrizAdjacencia[r][j] != 0)
+				if ((matrizAdjacencia[r][j] != 0) && (vizinhos.size()<2)) 
 				{
 					vizinhos.push_back(j);
 				}
+					
 			}
 			
-			for (int j = 0; j < matrizAdjacenciaAux0.size(); ++j)
+			for (int k = 0; k < matrizAdjacenciaAux0.size(); ++k)
 			{
-				matrizAdjacenciaAux0[i][vizinhos[0]] = 0;
-				matrizAdjacenciaAux0[vizinhos[0]][i] = 0;
-				matrizAdjacenciaAux0[i][vizinhos[1]] = 0;
-				matrizAdjacenciaAux0[vizinhos[1]][i] = 0;
+				//std::cout<<vizinhos[1]<<":";
+
+				if(vizinhos.size()==2){
+
+					matrizAdjacenciaAux0[i][vizinhos[1]] = 0;
+			 		matrizAdjacenciaAux0[vizinhos[1]][i] = 0;
+
+				}
+	
+			 	matrizAdjacenciaAux0[i][vizinhos[0]] = 0;
+			 	matrizAdjacenciaAux0[vizinhos[0]][i] = 0;
+			 	
 			}
 
 			CI.push_back(vizinhos[0]);
-			CI.push_back(vizinhos[1]);
+			if(vizinhos.size()==2)
+				CI.push_back(vizinhos[1]);
 			if(verificaCiclo(matrizAdjacenciaAux0)){
 				CI.pop_back();
 				CI.pop_back();
@@ -589,7 +623,7 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 			vizinhos.clear();
 			printFVS(FVS,matrizAdjacencia,CI,CIAux, 1);
-			calcularFVS(it++,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+			calcularFVS(it,lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 			
 	 	}else if(vizinhosGenericos(matrizAdjacenciaAux0,vizinhos,r1) == 3)
 
@@ -603,7 +637,7 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 		CI.push_back(random);
 
-		calcularFVS(it++,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+		calcularFVS(it,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 		for (int i = 0; i < matrizAdjacencia[random].size(); ++i)
 		{
@@ -620,7 +654,7 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 
 		CI.push_back(vizinhos[0]);
 
-		calcularFVS(it++,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+		calcularFVS(it,lb,ub,grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 		for (int i = 0; i < matrizAdjacencia[random].size(); ++i)
 		{
@@ -639,18 +673,18 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 			CI.pop_back();
 		}
 
-		calcularFVS(it++, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
+	 	calcularFVS(it, lb, ub, grafo,matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
 
 	 }
 
-	// printFVS(FVS,matrizAdjacencia,CI,CIAux, 1);
+	printFVS(FVS,matrizAdjacencia,CI,CIAux, 1);
 
-	//  for (int i = 0; i < grafo.size(); ++i)
-	//  {
+	 // for (int i = 0; i < grafo.size(); ++i)
+	 // {
 		
 
-	//  	std::cout<<std::endl;
-	//  }
+	 // 	std::cout<<std::endl;
+	 // }
 
 
 
@@ -660,16 +694,16 @@ int calcularFVS(int it, int lb, int ub,std::vector<std::vector<int>> &grafo, std
 // 		}
 }
 
-int BranchBound(int i,int lb, int up, std::set<int> &FVS, std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> &matrizAdjacenciaAux){
+int BranchBound(int i,int d,int lb, int up, std::set<int> &FVS, std::vector<std::vector<int>> matrizAdjacencia,std::vector<std::vector<int>> &matrizAdjacenciaAux,std::vector<std::set<int>> &FVS2){
 	
 	matrizAdjacenciaAux = matrizAdjacencia;
 	std::set<int>::iterator it;
-		if (FVS.size() >= up){
-			FVS.clear();
+	std::map<int, int> map;
+	std::vector<int> graus;
+		if (FVS.size() > up){
+			//FVS.clear();
 			return 0;
-		}else if((FVS.size()>lb) && (FVS.size()<up)){
-			up = FVS.size();
-		}else{
+	    }else{
 
 
 			FVS.insert(i);
@@ -677,7 +711,7 @@ int BranchBound(int i,int lb, int up, std::set<int> &FVS, std::vector<std::vecto
 
 			for (it=FVS.begin(); it!=FVS.end(); ++it){
 
-				std::cout<<*it;
+				//std::cout<<*it;
 				
 				for (int k = 0; k < matrizAdjacencia.size(); ++k)
 				{
@@ -701,8 +735,8 @@ int BranchBound(int i,int lb, int up, std::set<int> &FVS, std::vector<std::vecto
 				}
 		}
 		}
-
-		std::cout<<std::endl;
+		
+		//std::cout<<std::endl;
 
 	// 	for (int i = 0; i < matrizAdjacencia.size(); ++i)
 	// {
@@ -717,22 +751,35 @@ int BranchBound(int i,int lb, int up, std::set<int> &FVS, std::vector<std::vecto
 
 
 		 if (!verificaCiclo(matrizAdjacenciaAux)){
-		 	
-		 		std::cout<<"ejej";
-
+		 	FVS.erase(i);
+		 	FVS2.push_back(FVS);
 		 	return 0;
 
 
 		 }else{
-			for (int j = i+1; j < matrizAdjacencia.size(); ++j)
+			for (int j = 0; j < matrizAdjacencia.size(); ++j)
 			{
-				//std::cout<<i;
-		 		//if(matrizAdjacencia[j][i] != 0){
-		 			
-				int a =	BranchBound(j,lb, up, FVS, matrizAdjacencia, matrizAdjacenciaAux);
-				//}
-				if (a==0)
-					return 0;
+				SomaGraus(matrizAdjacencia,graus);
+
+				if (graus[j] == 1)
+					continue;	
+				else{
+					int d = MaxGrau(graus,map,matrizAdjacencia);
+					//std::cout<< d <<"d"<<std::endl;
+					for (int s = 0; s < matrizAdjacencia.size(); ++s)
+					{
+						matrizAdjacencia[d][s] = 0;
+						matrizAdjacencia[s][d] = 0;
+					}
+
+						BranchBound(i++,d,lb, up, FVS, matrizAdjacencia, matrizAdjacenciaAux,FVS2);
+						//int b = BranchBound(j++,lb, up, FVS, matrizAdjacencia, matrizAdjacenciaAux);
+						// if (a==0){
+						// 	//std::cout<<"njn";
+						// 	return 0;
+						// }
+				}
+				
 		  	}
 			
 		  }
@@ -741,29 +788,54 @@ int BranchBound(int i,int lb, int up, std::set<int> &FVS, std::vector<std::vecto
 
 }
 
+void printMax(std::vector<std::set<int>> FVS2){
+	int max = 0;
+	std::set<int>::iterator it0;
+
+	for (int i = 0; i < FVS2.size();i++){
+		if (FVS2[i].size() >= max)
+			max = i;
+		
+				
+	 }
+
+	 for (it0=FVS2[max].begin(); it0!=FVS2[max].end(); ++it0)
+		{
+			std::cout << *it0 ;
+		}
+
+		std::cout<<std::endl;
+
+}
+
 int main(){
 
-	std::set<int> FVS;
+	
 	std::set<int> FVS1;
+	std::vector<std::set<int>> FVS2;
 	std::vector<int> CI;
-	std::vector<std::vector<int>> matrizAdjacenciaAux2 (10, std::vector<int>(10) );
-	std::vector<std::vector<int>> matrizAdjacencia (10, std::vector<int>(10) );
-	std::vector<std::vector<int>> matrizAdjacenciaAux (10, std::vector<int>(10) );
-	std::vector<std::vector<int>> matrizAdjacenciaAux0 (10, std::vector<int>(10) );
-	std::vector<std::vector<int>> matrizAdjacenciaAux1 (10, std::vector<int>(10) );
-	std::vector<std::vector<int>> grafo (7, std::vector<int>(7) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux2 (200, std::vector<int>(200) );
+	std::vector<std::vector<int>> matrizAdjacencia (200, std::vector<int>(200) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux (200, std::vector<int>(200) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux0 (200, std::vector<int>(200) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux1 (200, std::vector<int>(200) );
+	std::vector<std::vector<int>> grafo (100, std::vector<int>(100) );
 	std::vector<int> somas;
 	std::map<int, int> map;
 	int *cc;
 	int ub, lb, it = 0;
 	int upperbound, lowerbound;
 	std::set<int>::iterator it0;
+	std::set<int>::iterator it1;
+	std::set<int>::iterator it2;
+
+	std::set<int> FVS;
 
 	std::chrono::time_point<std::chrono::system_clock> inicio, fim;
 	unsigned long long int nanosegundos_decorridos;
 
 	inicio = std::chrono::system_clock::now();
-	preencherMatriz(matrizAdjacencia);
+	preencherAleatorio(matrizAdjacencia);
 
 	//ComponentesConexas(matrizAdjacencia, cc);
 
@@ -774,7 +846,7 @@ int main(){
 
   	matrizAdjacenciaAux2 = matrizAdjacencia;
 	
-	 
+
 	SomaGraus(matrizAdjacencia, somas);
 	
 	ConjuntoIndependente(somas,matrizAdjacenciaAux,matrizAdjacencia, CI, map);
@@ -788,7 +860,6 @@ int main(){
     if (CI.size() == matrizAdjacencia.size()){
 		std::cout << "O FVS é vazio:";
 		return 0;
-	
 	}else if (map[MaxGrau(somas, map, matrizAdjacenciaAux0)] <= 1){
 		std::cout << "O FVS é vazio!";
 		return 0;
@@ -798,16 +869,22 @@ int main(){
 
 	  calcularFVS(it, lb, ub, grafo, matrizAdjacencia,matrizAdjacenciaAux,matrizAdjacenciaAux0, CI, FVS, map, somas );
       fim = std::chrono::system_clock::now();
-	  for (it0=FVS.begin(); it0!=FVS.end(); ++it0)
+
+    lowerbound = 1;
+	upperbound = FVS.size();
+	  for (it0=FVS.begin(); it0!=FVS.end(); ++it0){
 				std::cout << *it0 << std::endl;
+
+				BranchBound(0,*it0,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2,FVS2);
+	}
+
+	printMax(FVS2);
 	  
 	 nanosegundos_decorridos = nanosegundos_decorridos + std::chrono::duration_cast<std::chrono::nanoseconds> (fim-inicio).count();
 
 	 std::cout<<nanosegundos_decorridos<<" ms";
 	
 
-	lowerbound = 1;
-	upperbound = FVS.size();
 
 	
 
@@ -817,14 +894,20 @@ int main(){
 	// BranchBound(3,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	// BranchBound(4,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	// BranchBound(5,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
-	// BranchBound(6,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
+	// BranchBound(6,lowerbou5,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	// BranchBound(7,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	// BranchBound(8,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	// BranchBound(9,lowerbound,upperbound, FVS1, matrizAdjacenciaAux1,matrizAdjacenciaAux2);
 	
-	// for (it0=FVS1.begin(); it0!=FVS1.end(); ++it0)
-	// 			std::cout << *it0 << std::endl;
-
+	// for (int i = 0; i < FVS2.size();i++){
+	// 	for (it0=FVS2[i].begin(); it0!=FVS2[i].end(); ++it0)
+	// 	{
+	// 		std::cout << *it0 ;
+	// 	100
+	// 	std::cout<<std::endl;
+				
+	//  }
+	
 	 // for (int i = 0; i < grafo.size(); ++i)
 	 // {
 		// for (int j = 0; j < grafo[0].size(); ++j)
