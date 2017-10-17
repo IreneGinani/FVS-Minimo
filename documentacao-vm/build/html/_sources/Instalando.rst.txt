@@ -1,0 +1,9 @@
+Guia de Instalação
+==================
+
+Este é o guia de instalação para que você comece
+a utilizar as aplicações de segurança desenvolvidas,
+inicialmente é necessário que você instale os seguintes programas:
+Docker
+Docker-Compose
+Docker-Machine

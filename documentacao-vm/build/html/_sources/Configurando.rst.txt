@@ -1,0 +1,5 @@
+Guia de Configuração
+====================
+
+Este é o guia de configuração para que você possa utilizar as aplicações de segurança.
+Inicialmente é necessário que você já tenha completado todo o guia de instalação.
