@@ -8,31 +8,31 @@ Aplicações Web
 
    A aplicação 1 suporta projetos que possuem a seguinte aplicação:
 
-   .. image:: imagens/app1.png 
+   .. image:: documentacao-vm/source/imagens/app1.png 
 
 - Aplicação 2
 
    A aplicação 2 suporta projetos que possuem a seguinte aplicação:
 
-   .. image:: imagens/app2.png 
+   .. image:: documentacao-vm/source/imagens/app2.png 
 
 - Aplicação 3
 
    A aplicação 3 suporta projetos que possuem a seguinte aplicação:
 
-   .. image:: imagens/app3.png  
+   .. image:: documentacao-vm/source/imagens/app3.png  
 
 - Aplicação 4
 
    A aplicação 4 suporta projetos que possuem a seguinte aplicação:
 
-   .. image:: imagens/app4.png
+   .. image:: documentacao-vm/source/imagens/app4.png
  
 - Aplicação 5
 
    A aplicação 5 suporta projetos que possuem a seguinte aplicação:
 
-   .. image:: imagens/app5.png 
+   .. image:: documentacao-vm/source/imagens/app5.png 
 
 
 Preparando o Ambiente:
