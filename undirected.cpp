@@ -777,27 +777,31 @@ int main(){
 	std::vector<std::vector<int>> matrizAdjacenciaAux1 (5, std::vector<int>(5) );
 	
 	// TESTE COM 10 VÉRTICES
-	// std::vector<std::vector<int>> matrizAdjacenciaAux2 (10, std::vector<int>(10) );
-	// std::vector<std::vector<int>> matrizAdjacencia (10, std::vector<int>(10) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux (10, std::vector<int> (10) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux0 (10, std::vector<int>(10) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux1 (10, std::vector<int>(10) );
+	/*
+	std::vector<std::vector<int>> matrizAdjacenciaAux2 (10, std::vector<int>(10) );
+	std::vector<std::vector<int>> matrizAdjacencia (10, std::vector<int>(10) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux (10, std::vector<int> (10) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux0 (10, std::vector<int>(10) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux1 (10, std::vector<int>(10) );
+	*/
 	
 	// //TESTE COM 20 VÉRTICES
-	// std::vector<std::vector<int>> matrizAdjacenciaAux2 (20, std::vector<int>(20) );
-	// std::vector<std::vector<int>> matrizAdjacencia (20, std::vector<int>(20) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux (20, std::vector<int>(20) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux0 (20, std::vector<int>(20) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux1 (20, std::vector<int>(20) );
-	
+	/*
+	std::vector<std::vector<int>> matrizAdjacenciaAux2 (20, std::vector<int>(20) );
+	std::vector<std::vector<int>> matrizAdjacencia (20, std::vector<int>(20) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux (20, std::vector<int>(20) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux0 (20, std::vector<int>(20) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux1 (20, std::vector<int>(20) );
+	*/	
 
 	// //TESTE COM 40 VÉRTICES
-	// std::vector<std::vector<int>> matrizAdjacenciaAux2 (40, std::vector<int>(40) );
-	// std::vector<std::vector<int>> matrizAdjacencia (40, std::vector<int>(40) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux (40, std::vector<int>(40) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux0 (40, std::vector<int>(40) );
-	// std::vector<std::vector<int>> matrizAdjacenciaAux1 (40, std::vector<int>(40) );
-	
+	/*
+	std::vector<std::vector<int>> matrizAdjacenciaAux2 (40, std::vector<int>(40) );
+	std::vector<std::vector<int>> matrizAdjacencia (40, std::vector<int>(40) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux (40, std::vector<int>(40) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux0 (40, std::vector<int>(40) );
+	std::vector<std::vector<int>> matrizAdjacenciaAux1 (40, std::vector<int>(40) );
+	*/
 
 
 	std::chrono::time_point<std::chrono::system_clock> inicio, fim;
