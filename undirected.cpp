@@ -12,7 +12,7 @@ void preencherAleatorio (std::vector<std::vector<int>> &matrizAdjacencia){
 	{
 		for (int j = 0; j < matrizAdjacencia[0].size(); ++j)
 		{
-			if(( i%2 == 0) || (j%2 == 0)){
+			if( (i%2 == 0) || (j%2 == 0) ){
 				matrizAdjacencia[i][j] = 1;
 				matrizAdjacencia[j][i] = 1;
 			}
@@ -126,10 +126,8 @@ void SomaGraus(std::vector<std::vector<int>> &matrizAdjacencia,std::vector<int> 
 	{
 		for (int j = 0; j < matrizAdjacencia[0].size(); ++j)
 		{
-			if(matrizAdjacencia[i][j] == 1)
-				soma++;
+			if(matrizAdjacencia[i][j] == 1) soma++;
 		}
-
 		
 		somas.push_back(soma);
 		soma = 0;
@@ -150,7 +148,6 @@ bool eVazio(std::vector<int> somas){
 	for (int i = 0; i < somas.size(); ++i)
 	{
 		if (somas[i] == 0){
-
 			count ++;
 		}
 	}
@@ -164,7 +161,6 @@ bool eVazio(std::vector<int> somas){
 
 }
 int MinGrau(std::vector<int> &soma, std::map<int, int> &map, std::vector<std::vector<int>> &matrizAdjacencia ){
-
 
 
 	for (int i = 0; i < soma.size(); ++i)
